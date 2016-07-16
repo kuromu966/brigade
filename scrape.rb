@@ -16,15 +16,18 @@ end
 #読んだ記事は一旦ローカルに保存しておく。
 open('source.html','w').write(html)
 
-#何度も掲示板にアクセスする必要がないなら、下の行のコメントアウトを外してローカルから読む。
+#何度も掲示板にアクセスする必要がないなら、上をコメントアウト＆下の行のコメントを外してローカルから読む。
 #html = open('source.html','r').read
 
+#HTMLをNokogiriで切り刻む。
 doc = Nokogiri::HTML.parse(html, nil, charset)
 
 entries = []
 Entry = Struct.new("Entry", :title, :path, :content,:profile)
 
+#記事１本毎でループ
 doc.xpath('//table[@class="thread"]/tr/td').each do |node|
+  #記事タイトルを抽出
   title_node = node.xpath('.//tt/a/b')
   title = title_node.inner_text
 
@@ -46,3 +49,5 @@ end
 
 #配列まるっとYAMLで保存
 YAML.dump(entries, File.open('entries.yml','w'))
+
+#書式不備でスクレイピングし損ねたエントリーは、entries.ymlを直線編集してフォローすべし（ああめんどい）。
