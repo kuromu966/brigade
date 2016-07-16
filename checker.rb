@@ -27,6 +27,6 @@ end
 
 #類似度を降順でソートしつつ、タブ区切りで結果を出力
 #タブ区切りならコピペでスプレッドシートに貼れるもんね！
-compared.each_pair.sort_by{|k,v|v}.reverse_each{|k,v|
+compared.each_pair.sort_by{|k,v|v}.reverse_each do |k,v|
   puts k.to_a.map{|a|a.title}.push(v).join("\t")
-}
+end

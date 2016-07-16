@@ -7,20 +7,17 @@ require 'yaml'
 #対象スレッドの全記事URL（▼リンクからのアレ）
 url = 'http://cwtg.jp/bbs3/wforum.cgi?list=&no=7795&mode=allread&page=0'
 
-charset = nil
-html = open(url) do |f|
-  charset = f.charset # 文字種別を取得
-  f.read # htmlを読み込んで変数htmlに渡す
-end
+Charset = 'sjis'
+html = open(url).read
 
 #読んだ記事は一旦ローカルに保存しておく。
-open('source.html','w').write(html)
+#open('source.html','w').write(html)
 
 #何度も掲示板にアクセスする必要がないなら、上をコメントアウト＆下の行のコメントを外してローカルから読む。
-#html = open('source.html','r').read
+html = open('source.html','r').read
 
 #HTMLをNokogiriで切り刻む。
-doc = Nokogiri::HTML.parse(html, nil, charset)
+doc = Nokogiri::HTML.parse(html, nil, Charset)
 
 entries = []
 Entry = Struct.new("Entry", :title, :path, :content,:profile)
@@ -30,13 +27,14 @@ doc.xpath('//table[@class="thread"]/tr/td').each do |node|
   #記事タイトルを抽出
   title_node = node.xpath('.//tt/a/b')
   title = title_node.inner_text
+  #puts title
 
   #記事の抽出条件。記事タイトルが正規表現とマッチしたら以下続行、さもなくばスルーして次へ。
   next unless  title =~ /アーチャー[：:].+?[：:]アーチャー.+/
 
   #記事を適宜スクレイピングしてEntry構造体に格納
   entry_node = node.xpath('.//div/p/font')
-  entry_node.search('br').each do|br| br.replace("\n") end
+  entry_node.search('br').each {|br| br.replace("\n") }
   content = entry_node.inner_text
 
   match = content.match(/設定：(.+)/m )
