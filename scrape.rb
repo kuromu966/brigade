@@ -11,10 +11,10 @@ Charset = 'sjis'
 html = open(url).read
 
 #読んだ記事は一旦ローカルに保存しておく。
-#open('source.html','w').write(html)
+open('source.html','w').write(html)
 
-#何度も掲示板にアクセスする必要がないなら、上をコメントアウト＆下の行のコメントを外してローカルから読む。
-html = open('source.html','r').read
+#何度も掲示板にアクセスする必要がないなら、上をコメントアウト＆下のコメントを外してローカルから読む。
+#html = open('source.html','r').read
 
 #HTMLをNokogiriで切り刻む。
 doc = Nokogiri::HTML.parse(html, nil, Charset)
