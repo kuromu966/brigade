@@ -22,6 +22,7 @@ if (is_uploaded_file($_FILES["csvfile"]["tmp_name"])) {
       //一行目は捨てる
       fgetcsv($fp, 0, ",");
       while (($data = fgetcsv($fp, 0, ",")) !== FALSE) {
+        
         echo "登録ID：";
         echo mb_convert_encoding ($data[2], "SJIS", "AUTO");
         echo "<br/>";
@@ -58,6 +59,8 @@ if (is_uploaded_file($_FILES["csvfile"]["tmp_name"])) {
         //echo mb_convert_encoding ($data[12], "SJIS", "AUTO");
         //echo "<br/>";
 
+        // 行頭のhを削除
+        $data[4] = ltrim($data[4], 'h');
         echo "登録記事URL：";
         echo mb_convert_encoding ($data[4], "SJIS", "AUTO");
         echo "<br/>";
