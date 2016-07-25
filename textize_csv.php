@@ -23,13 +23,17 @@ if (is_uploaded_file($_FILES["csvfile"]["tmp_name"])) {
       fgetcsv($fp, 0, ",");
       while (($data = fgetcsv($fp, 0, ",")) !== FALSE) {
         
+        //echo "募集職業：";
+        //echo mb_convert_encoding ($data[1], "SJIS", "AUTO");
+        //echo "<br/>";
+
         echo "登録ID：";
         echo mb_convert_encoding ($data[2], "SJIS", "AUTO");
         echo "<br/>";
 
-        //echo "募集職業：";
-        //echo mb_convert_encoding ($data[1], "SJIS", "AUTO");
-        //echo "<br/>";
+        echo "前回登録ID：";
+        echo mb_convert_encoding ($data[3], "SJIS", "AUTO");
+        echo "<br/>";
 
         echo "キャラクター名：";
         echo mb_convert_encoding ($data[5], "SJIS", "AUTO");
