@@ -27,50 +27,47 @@ if (is_uploaded_file($_FILES["csvfile"]["tmp_name"])) {
         //echo mb_convert_encoding ($data[1], "SJIS", "AUTO");
         //echo "<br/>";
 
-        echo "登録ID：";
-        echo mb_convert_encoding ($data[2], "SJIS", "AUTO");
+        // 行頭のhを削除
+        // $data[4] = ltrim($data[4], 'h');
+        echo "登録記事URL：";
+        echo mb_convert_encoding ($data[4], "SJIS", "AUTO");
         echo "<br/>";
 
-        echo "前回登録ID：";
-        echo mb_convert_encoding ($data[3], "SJIS", "AUTO");
+        echo "登録ID：";
+        echo mb_convert_encoding ($data[2], "SJIS", "AUTO");
         echo "<br/>";
 
         echo "キャラクター名：";
         echo mb_convert_encoding ($data[5], "SJIS", "AUTO");
         echo "<br/>";
 
+        echo "名前の由来：";
+        echo mb_convert_encoding ($data[6], "SJIS", "AUTO");
+        echo "<br/>";
+
         echo "プレイヤー名：";
         echo mb_convert_encoding ($data[7], "SJIS", "AUTO");
         echo "<br/>";
 
-        //echo "国民番号：";
-        //echo mb_convert_encoding ($data[8], "SJIS", "AUTO");
-        //echo "<br/>";
+        echo "国民番号：";
+        echo mb_convert_encoding ($data[8], "SJIS", "AUTO");
+        echo "<br/>";
 
-        echo "職業：";
+        echo "職業名：";
         echo mb_convert_encoding ($data[9], "SJIS", "AUTO");
         echo "<br/>";
 
-        //echo "部隊内担当：";
-        //echo mb_convert_encoding ($data[10], "SJIS", "AUTO");
-        //echo "<br/>";
+        echo "部隊内担当：";
+        echo mb_convert_encoding ($data[10], "SJIS", "AUTO");
+        echo "<br/>";
 
-        echo "設定：<br/>";
+        echo "設定：000文字<br/>";
         echo mb_convert_encoding ($data[11], "SJIS", "AUTO");
         echo "<br/>";
 
         //echo "備考：";
         //echo mb_convert_encoding ($data[12], "SJIS", "AUTO");
         //echo "<br/>";
-
-        // 行頭のhを削除
-        $data[4] = ltrim($data[4], 'h');
-        echo "登録記事URL：";
-        echo mb_convert_encoding ($data[4], "SJIS", "AUTO");
-        echo "<br/>";
-
-        //echo "名前の由来：":
-        //echo mb_convert_encoding ($data[6], "SJIS", "AUTO");
 
         //echo "複数キャラ番目";
         //echo mb_convert_encoding ($data[3], "SJIS", "AUTO");
